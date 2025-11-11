@@ -3,6 +3,7 @@ import { LanguageToggle } from '@/components/LanguageToggle';
 import { Hero } from '@/components/Hero';
 import { About } from '@/components/About';
 import { Highlights } from '@/components/Highlights';
+import { Gallery } from '@/components/Gallery';
 import { Benefits } from '@/components/Benefits';
 import { Location } from '@/components/Location';
 import { FAQ } from '@/components/FAQ';
@@ -80,6 +81,7 @@ const Index = () => {
         <Hero />
         <About />
         <Highlights />
+        <Gallery />
         <Benefits />
         <Location />
         <FAQ />

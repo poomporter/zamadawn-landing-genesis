@@ -1,5 +1,6 @@
 import { useLanguage } from '@/contexts/LanguageContext';
 import { MapPin, Car, Sunset } from 'lucide-react';
+import panoramicView from '@/assets/panoramic-view.jpg';
 
 export const Location = () => {
   const { t } = useLanguage();
@@ -13,8 +14,15 @@ export const Location = () => {
           </h2>
 
           <div className="bg-card rounded-2xl overflow-hidden border border-bronze/20 shadow-warm">
-            <div className="aspect-video bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-              <MapPin className="w-16 h-16 text-white" />
+            <div className="aspect-video relative">
+              <img 
+                src={panoramicView} 
+                alt="ZAMĀ Skybar Location View"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-bronze-dark/60 to-transparent flex items-center justify-center">
+                <MapPin className="w-16 h-16 text-white drop-shadow-lg" />
+              </div>
             </div>
             
             <div className="p-8 space-y-6">

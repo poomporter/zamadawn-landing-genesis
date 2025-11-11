@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import zamaLogo from '@/assets/zama-logo.png';
 import zamaPattern from '@/assets/zama-pattern.png';
+import heroImage from '@/assets/hero-skybar.jpg';
 
 export const Hero = () => {
   const { t } = useLanguage();
@@ -56,9 +57,17 @@ export const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Pattern Background */}
+      {/* Hero Background Image */}
       <div 
-        className="absolute inset-0 opacity-10"
+        className="absolute inset-0 bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${heroImage})`
+        }}
+      />
+      
+      {/* Pattern Overlay */}
+      <div 
+        className="absolute inset-0 opacity-5"
         style={{
           backgroundImage: `url(${zamaPattern})`,
           backgroundSize: '600px',
@@ -67,17 +76,19 @@ export const Hero = () => {
       />
       
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-muted" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/85 to-background/95" />
       
       <div className="container relative z-10 px-4 py-20">
         <div className="max-w-4xl mx-auto text-center space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-1000">
           {/* Logo */}
           <div className="flex justify-center mb-8">
-            <img 
-              src={zamaLogo} 
-              alt="ZAMĀ Skybar Logo" 
-              className="w-32 h-32 md:w-40 md:h-40 drop-shadow-2xl animate-in zoom-in duration-700"
-            />
+            <div className="bg-background/80 backdrop-blur-md rounded-3xl p-6 shadow-warm">
+              <img 
+                src={zamaLogo} 
+                alt="ZAMĀ Skybar Logo" 
+                className="w-32 h-32 md:w-48 md:h-48 object-contain drop-shadow-2xl animate-in zoom-in duration-700"
+              />
+            </div>
           </div>
 
           {/* Headline */}
