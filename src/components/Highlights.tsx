@@ -1,0 +1,97 @@
+import { useLanguage } from '@/contexts/LanguageContext';
+import { Card } from '@/components/ui/card';
+import { Eye, Sparkles, Music, Palette, Wine } from 'lucide-react';
+
+export const Highlights = () => {
+  const { t } = useLanguage();
+
+  const highlights = [
+    {
+      icon: Eye,
+      title: t({
+        th: 'วิวริมทะเล 360°',
+        en: '360° Seaside View'
+      }),
+      description: t({
+        th: 'จากสกายบาร์ที่สูงที่สุดในพัทยา',
+        en: "From Pattaya's highest skybar"
+      })
+    },
+    {
+      icon: Sparkles,
+      title: t({
+        th: 'Sun-Inspired Mixology',
+        en: 'Sun-Inspired Mixology'
+      }),
+      description: t({
+        th: 'ค็อกเทลที่ตีความแสงอาทิตย์',
+        en: 'Cocktails that interpret the sun'
+      })
+    },
+    {
+      icon: Music,
+      title: t({
+        th: 'Sunset Lounge & Live',
+        en: 'Sunset Lounge & Live'
+      }),
+      description: t({
+        th: 'การแสดงสดและบรรยากาศยามเย็น',
+        en: 'Live performances & evening ambiance'
+      })
+    },
+    {
+      icon: Palette,
+      title: t({
+        th: 'ดีไซน์เมดิเตอร์เรเนียน–มายัน',
+        en: 'Mediterranean–Mayan Design'
+      }),
+      description: t({
+        th: 'โทนอุ่น ลักชัวรี่',
+        en: 'Warm-luxury aesthetic'
+      })
+    },
+    {
+      icon: Wine,
+      title: t({
+        th: 'Champagne Rituals',
+        en: 'Champagne Rituals'
+      }),
+      description: t({
+        th: 'การรับประทานอาหารระดับสูง',
+        en: 'Elevated dining experience'
+      })
+    }
+  ];
+
+  return (
+    <section className="py-20 bg-background">
+      <div className="container px-4">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-bronze-dark">
+            {t({
+              th: 'จุดเด่น',
+              en: 'Key Highlights'
+            })}
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {highlights.map((highlight, index) => (
+              <Card
+                key={index}
+                className="p-6 bg-card hover:bg-muted/50 transition-all duration-300 hover:shadow-warm border-bronze/20 group"
+              >
+                <highlight.icon className="w-12 h-12 text-secondary mb-4 group-hover:scale-110 transition-transform duration-300" />
+                <h3 className="text-xl font-bold mb-2 text-bronze-dark">
+                  {highlight.title}
+                </h3>
+                <p className="text-muted-foreground">
+                  {highlight.description}
+                </p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
