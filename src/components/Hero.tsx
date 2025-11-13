@@ -7,6 +7,7 @@ import { useToast } from '@/hooks/use-toast';
 import zamaLogo from '@/assets/zama-logo.png';
 import zamaPattern from '@/assets/zama-pattern.png';
 import heroImage from '@/assets/hero-skybar.jpg';
+import { MAILCHIMP_CONFIG } from '@/config/mailchimp';
 
 export const Hero = () => {
   const { t } = useLanguage();
@@ -41,18 +42,54 @@ export const Hero = () => {
     }
 
     setIsLoading(true);
-    // Simulate API call
-    setTimeout(() => {
-      toast({
-        description: t({
-          th: 'ขอบคุณ! เราบันทึกอีเมลของคุณแล้ว — พบกันบนชั้น 38',
-          en: "Thank you! You're on the list — see you on Level 38."
-        })
-      });
-      setEmail('');
-      setConsent(false);
-      setIsLoading(false);
-    }, 1000);
+
+    // ถ้าเปิดใช้งาน Mailchimp ให้ส่งข้อมูลไปที่ Mailchimp
+    if (MAILCHIMP_CONFIG.ENABLED && MAILCHIMP_CONFIG.FORM_ACTION_URL !== 'YOUR_MAILCHIMP_FORM_ACTION_URL') {
+      try {
+        const formData = new FormData();
+        formData.append(MAILCHIMP_CONFIG.EMAIL_FIELD_NAME, email);
+
+        // ส่งข้อมูลไปที่ Mailchimp
+        await fetch(MAILCHIMP_CONFIG.FORM_ACTION_URL, {
+          method: 'POST',
+          body: formData,
+          mode: 'no-cors' // Mailchimp ไม่รองรับ CORS
+        });
+
+        toast({
+          description: t({
+            th: 'ขอบคุณ! เราบันทึกอีเมลของคุณแล้ว — พบกันบนชั้น 38',
+            en: "Thank you! You're on the list — see you on Level 38."
+          })
+        });
+        setEmail('');
+        setConsent(false);
+      } catch (error) {
+        console.error('Mailchimp subscription error:', error);
+        toast({
+          variant: 'destructive',
+          description: t({
+            th: 'เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง',
+            en: 'Something went wrong. Please try again.'
+          })
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    } else {
+      // ถ้ายังไม่ได้ตั้งค่า Mailchimp ให้แสดงข้อความทั่วไป
+      setTimeout(() => {
+        toast({
+          description: t({
+            th: 'ขอบคุณ! เราบันทึกอีเมลของคุณแล้ว — พบกันบนชั้น 38',
+            en: "Thank you! You're on the list — see you on Level 38."
+          })
+        });
+        setEmail('');
+        setConsent(false);
+        setIsLoading(false);
+      }, 1000);
+    }
   };
 
   return (
