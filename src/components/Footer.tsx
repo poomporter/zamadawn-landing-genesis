@@ -13,7 +13,7 @@ export const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
             {/* Logo & Brand */}
             <div className="space-y-4">
-              <img src={zamaLogo} alt="ZAMĀ Logo" className="w-20 h-20" />
+              <img src={zamaLogo} alt="ZAMĀ Logo" className="h-16 w-auto object-contain" />
               <div>
                 <h3 className="font-bold text-xl mb-1">ZAMĀ Skybar</h3>
                 <p className="text-primary/80 text-sm">
